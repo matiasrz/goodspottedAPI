@@ -13,5 +13,9 @@
 #
 class ProductProspect < ApplicationRecord
   enum status: %i[pending approved]
+
+  validates :name, :position, :country, :store, presence: true
+  validates :name, uniqueness: true
+
   has_one :product
 end
