@@ -5,7 +5,7 @@ This README would normally document whatever steps are necessary to get your app
 ### What is this repository for? ###
 
 * Quick summary
-* Version
+* Ruby version -> 2.7.1
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 ### How do I get set up? ###
@@ -28,6 +28,13 @@ This README would normally document whatever steps are necessary to get your app
 * Repo owner or admin
 * Other community or team contact
 
-* Ruby version -> 2.7.1
-
 # Models Generation Command
+- rails g model productProspect status:integer name:string position:string country:string store:string --no-test-framework
+- rails g model product product_prospect:references name:string 'price:decimal{5,3}' --no-test-framework
+- rails g model country name:string --no-test-framework
+- rails g model store country:references name:string --no-test-framework
+- rails g model productStore product:references store:references --no-test-framework
+
+# Q&A
+* Why the table/model productProspect doesn't have country & store as foreign key(FK)?
+- We need to be able to receive thousands of request and it's faster not to have a defined relationship. Also the bussiness flow will check if the store/country exists with some API(Google Maps u other).
