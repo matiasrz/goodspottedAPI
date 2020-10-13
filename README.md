@@ -31,4 +31,3 @@ This README would normally document whatever steps are necessary to get your app
 * Ruby version -> 2.7.1
 
 # Models Generation Command
-- rails g model 
