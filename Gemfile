@@ -44,3 +44,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Authentication
 gem 'devise'
+gem 'devise-jwt', '~> 0.7.0'
+
+# Support for Cross-Origin Resource Sharing (CORS) for Rack compatible web applications.
+gem 'rack-cors'

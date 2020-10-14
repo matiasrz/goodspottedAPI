@@ -36,5 +36,15 @@ module Api
     config.to_prepare do
       DeviseController.respond_to :json
     end
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'http://localhost:3000'
+        resource '/api/v1/*',
+          headers: %w(Authorization),
+          methods: :any,
+          expose: %w(Authorization),
+          max_age: 600
+      end
+    end
   end
 end
