@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   before_action :constraint_json
+  # before_action :authenticate_user!
 
   private
 
