@@ -1,14 +1,14 @@
 class Api::V1::StoresController < ApplicationController
   def index
     stores = Store.all
-    render json: stores
+    render locals: { stores: stores }
   end
 
   def show
     store = find_store
     head(:not_found) && return unless store.present?
 
-    render json: store
+    render locals: { store: store }
   end
 
   def create
@@ -18,7 +18,7 @@ class Api::V1::StoresController < ApplicationController
       return
     end
 
-    render json: store
+    render :show, locals: { store: store }
   end
 
   def update
@@ -28,7 +28,7 @@ class Api::V1::StoresController < ApplicationController
       return
     end
 
-    render json: store
+    render :show, locals: { store: store }
   end
 
   private

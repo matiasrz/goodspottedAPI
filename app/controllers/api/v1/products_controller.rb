@@ -1,14 +1,14 @@
 class Api::V1::ProductsController < ApplicationController
   def index
     products = Product.all
-    render json: products
+    render locals: { products: products }
   end
 
   def show
     product = find_product
     head(:not_found) && return unless product.present?
 
-    render json: product
+    render locals: { product: product }
   end
 
   def create
@@ -18,7 +18,7 @@ class Api::V1::ProductsController < ApplicationController
       return
     end
 
-    render json: product
+    render :show, locals: { product: product }
   end
 
   def update
@@ -28,7 +28,7 @@ class Api::V1::ProductsController < ApplicationController
       return
     end
 
-    render json: product
+    render locals: { product: product }
   end
 
   private
