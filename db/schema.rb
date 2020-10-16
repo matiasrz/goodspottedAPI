@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_14_212058) do
+ActiveRecord::Schema.define(version: 2020_10_16_112921) do
 
   create_table "allowlisted_jwts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2020_10_14_212058) do
   create_table "product_prospects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "name", null: false
+    t.decimal "price", precision: 5, scale: 3, null: false
     t.string "position"
     t.string "country"
     t.string "store"
