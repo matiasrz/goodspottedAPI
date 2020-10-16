@@ -48,3 +48,7 @@ gem 'devise-jwt', '~> 0.7.0'
 
 # Support for Cross-Origin Resource Sharing (CORS) for Rack compatible web applications.
 gem 'rack-cors'
+
+# Async processes
+gem 'sidekiq'
+gem 'sidekiq-limit_fetch'
