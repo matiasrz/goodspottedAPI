@@ -1,7 +1,9 @@
 class Api::V1::ProductProspectsController < ApplicationController
   def index
-    prospects = ProductProspect.pending
-    render locals: { prospects: prospects }
+    prospects = ProductProspect.where(status: %i[pending manually_revision])
+                               .paginate(page: params[:page])
+    prospects_count = ProductProspect.where(status: %i[pending manually_revision]).size
+    render locals: { prospects: prospects, prospects_count: prospects_count }
   end
 
   def show
