@@ -1,14 +1,16 @@
 class Api::V1::ProductProspectsController < ApplicationController
   def index
-    prospects = ProductProspect.pending
-    render json: prospects
+    prospects = ProductProspect.where(status: %i[pending manually_revision])
+                               .paginate(page: params[:page])
+    prospects_count = ProductProspect.where(status: %i[pending manually_revision]).size
+    render locals: { prospects: prospects, prospects_count: prospects_count }
   end
 
   def show
     prospect = find_product_prospect
     head(:not_found) && return unless prospect.present?
 
-    render json: prospect
+    render locals: { prospect: prospect }
   end
 
   def create
@@ -18,7 +20,7 @@ class Api::V1::ProductProspectsController < ApplicationController
       return
     end
 
-    render json: prospect
+    render :show, locals: { prospect: prospect }
   end
 
   def update
@@ -28,7 +30,7 @@ class Api::V1::ProductProspectsController < ApplicationController
       return
     end
 
-    render json: prospect
+    render :show, locals: { prospect: prospect }
   end
 
   private

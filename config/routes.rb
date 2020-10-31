@@ -13,4 +13,7 @@ Rails.application.routes.draw do
       resources :stores, except: %i[delete new]
     end
   end
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/admin/sidekiq'
 end

@@ -1,14 +1,14 @@
 class Api::V1::CountriesController < ApplicationController
   def index
     countries = Country.all
-    render json: countries
+    render locals: { countries: countries }
   end
 
   def show
     country = find_country
     head(:not_found) && return unless country.present?
 
-    render json: country
+    render locals: { country: country }
   end
 
   def create
@@ -18,7 +18,7 @@ class Api::V1::CountriesController < ApplicationController
       return
     end
 
-    render json: country
+    render :show, locals: { country: country }
   end
 
   def update
@@ -28,7 +28,7 @@ class Api::V1::CountriesController < ApplicationController
       return
     end
 
-    render json: country
+    render :show, locals: { country: country }
   end
 
   private

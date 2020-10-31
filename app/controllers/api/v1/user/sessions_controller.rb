@@ -10,9 +10,13 @@ class Api::V1::User::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    self.resource = warden.authenticate!(auth_options)
+    set_flash_message!(:notice, :signed_in)
+    sign_in(resource_name, resource)
+    yield resource if block_given?
+    respond_with resource_json, location: after_sign_in_path_for(resource)
+  end
 
   # DELETE /resource/sign_out
   def destroy
@@ -37,6 +41,10 @@ class Api::V1::User::SessionsController < Devise::SessionsController
 
   def jwt_error
     render json: { message: 'Unknown or Revocated JWT.' }
+  end
+
+  def resource_json
+    { firstName: resource.first_name, lastName: resource.last_name, email: resource.email }
   end
 
   # protected
