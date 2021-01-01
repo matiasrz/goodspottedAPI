@@ -23,13 +23,17 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  # Dummy Data Generator
   gem 'faker'
+  # Debug gem - Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
+  # Behaviour Driven Development for Ruby - Testing gem.
+  # gem 'rspec'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -46,9 +50,6 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # Authentication
 gem 'devise'
 gem 'devise-jwt', '~> 0.7.0'
-
-# Support for Cross-Origin Resource Sharing (CORS) for Rack compatible web applications.
-gem 'rack-cors'
 
 # Async processes
 gem 'sidekiq'
