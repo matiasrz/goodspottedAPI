@@ -7,11 +7,12 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins '*'
+    origins 'localhost:3001', '127.0.0.1:3001'
     resource '/api/v1/*',
-             headers: %w[Authorization],
+             credentials: true,
+             headers: :any,
              methods: :any,
-             expose: %w[Authorization],
+             expose: %w[Authorization Access-Control-Allow-Origin],
              max_age: 600
   end
 end

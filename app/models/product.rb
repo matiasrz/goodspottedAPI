@@ -13,4 +13,7 @@ class Product < ApplicationRecord
   belongs_to :product_prospect
   has_many :product_stores
   has_many :stores, through: :product_stores
+
+  validates :name, presence: true, uniqueness: { case_sensitive: true }
+  validates :price, presence: true, numericality: { only_integer: true, greater_than: 0 }
 end
