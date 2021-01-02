@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_112921) do
+ActiveRecord::Schema.define(version: 2020_11_12_104753) do
 
   create_table "allowlisted_jwts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 2020_10_16_112921) do
   create_table "stores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "country_id", null: false
     t.string "name", null: false
+    t.string "latitude", null: false
+    t.string "longitude", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["country_id"], name: "index_stores_on_country_id"

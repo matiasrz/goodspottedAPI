@@ -15,8 +15,8 @@
 class ProductProspect < ApplicationRecord
   enum status: %i[pending manually_revision approved]
 
-  validates :name, :position, :country, :store, presence: true
-  validates :name, uniqueness: true
-
   has_one :product
+
+  validates :name, :position, :country, :store, presence: true
+  validates :name, uniqueness: { case_sensitive: true } 
 end
