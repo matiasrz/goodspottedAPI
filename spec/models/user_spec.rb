@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -18,13 +20,14 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
+RSpec.describe User, type: :model do
+  context 'Bussiness Rules' do
+    describe 'Validations' do
+      User.create! first_name: 'First Name', last_name: 'Last Name',
+                   email: '1@2.com', password: '123456'
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+      it { should validate_presence_of(:first_name) }
+      it { should validate_presence_of(:last_name) }
+    end
+  end
+end
