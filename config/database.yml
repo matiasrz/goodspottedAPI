@@ -14,7 +14,7 @@ default: &default
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password: <%= Rails.application.credentials[Rails.env.to_sym][:db_password] %>
+  password: <%= Rails.application.credentials.mysql[:password] %>
   host: localhost
 
 development:
@@ -49,6 +49,4 @@ test:
 #
 production:
   <<: *default
-  database: foof_production
-  username: api
-  password: <%= ENV['API_DATABASE_PASSWORD'] %>
+  url: <%= Rails.application.credentials.mysql[:url] %>
