@@ -64,7 +64,7 @@ Thumbs.db
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
+/config/credentials/*.key
 
 # Ignore redis dump file
 dump.rdb
