@@ -3,16 +3,23 @@
 #  This template allows you to validate your Ruby code.
 #  The workflow allows running tests and code linting on the default branch.
 
-image: ruby:2.7
+image: ruby:2.7.1
 
 pipelines:
   default:
     - parallel:
       - step:
-          name: Test
+          name: Checking Dependencies
           script:
             - bundle install
-            - bundle exec rake
+      - step:
+          name: Running Rspec Tests
+          script:
+            - bundle exec rspec
+      - step:
+          name: Running Migrations
+          script:
+            - bundle exec rake db:migrate
       - step:
           name: Lint code
           script:
