@@ -1,28 +1,29 @@
 image: ruby:2.7.1
 
-base: &minimum_validation
-  - parallel:
-    - step:
+definitions:
+  steps:
+    - step: &dependencies
         name: Checking Dependencies
         script:
           - bundle install
-    - step:
+    - step: &lint-code
         name: Lint code
         script:
           - ruby -wc **/*.rb
-
-build: &pre-build
-  - step:
-      name: Running Rspec Tests
-      script:
-        - bundle exec rspec
-  - step:
-      name: Running Migrations
-      script:
-        - bundle exec rake db:migrate
+    - step: &rspec
+        name: Running Rspec Tests
+        script:
+          - bundle exec rspec
+    - step: &migrations
+        name: Running Migrations
+        script:
+          - bundle exec rake db:migrate
 
 pipelines:
   branches:
     master:
-      <<: *minimum_validation
-      <<: *pre-build
+      - parallel:
+        - step: *dependencies
+        - step: *lint-code
+      - step: *rspec
+      - step: *migrations
