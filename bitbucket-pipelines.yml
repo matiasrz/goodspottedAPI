@@ -1,19 +1,28 @@
-#  Template Ruby build
+image: ruby:2.7.1
 
-#  This template allows you to validate your Ruby code.
-#  The workflow allows running tests and code linting on the default branch.
+base: &minimum_validation
+  - parallel:
+    - step:
+        name: Checking Dependencies
+        script:
+          - bundle install
+    - step:
+        name: Lint code
+        script:
+          - ruby -wc **/*.rb
 
-image: ruby:2.7
+build: &pre-build
+  - step:
+    name: Running Rspec Tests
+    script:
+      - bundle exec rspec
+  - step:
+      name: Running Migrations
+      script:
+        - bundle exec rake db:migrate
 
 pipelines:
-  default:
-    - parallel:
-      - step:
-          name: Test
-          script:
-            - bundle install
-            - bundle exec rake
-      - step:
-          name: Lint code
-          script:
-            - ruby -wc **/*.rb
+  branches:
+    master:
+      <<: *minimum_validation
+      <<: *pre-build

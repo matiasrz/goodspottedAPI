@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
   context 'Bussiness Rules' do
     describe 'Validations' do
       User.create! first_name: 'First Name', last_name: 'Last Name',
-                   email: '1@2.com', password: '123456'
+                   email: Faker::Internet.unique.email, password: '123456'
 
       it { should validate_presence_of(:first_name) }
       it { should validate_presence_of(:last_name) }
