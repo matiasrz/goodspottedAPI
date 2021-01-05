@@ -13,9 +13,9 @@ base: &minimum_validation
 
 build: &pre-build
   - step:
-    name: Running Rspec Tests
-    script:
-      - bundle exec rspec
+      name: Running Rspec Tests
+      script:
+        - bundle exec rspec
   - step:
       name: Running Migrations
       script:
