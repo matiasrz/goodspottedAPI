@@ -1,6 +1,12 @@
 image: ruby:2.7.1
 
 definitions:
+  services:
+    mysql:
+      image: mysql:latest
+      variables:
+        MYSQL_DATABASE: foof_test
+        MYSQL_ROOT_PASSWORD: $DB_TEST_PASSWORD
   steps:
     - step: &syntax-check
         name: Checking Ruby Syntax
@@ -10,7 +16,8 @@ definitions:
         name: Checking Dependencies & Running Rspec Tests
         script:
           - bundle install
-          - RAILS_MASTER_KEY=$TEST_MASTER_KEY RAILS_ENV=test bundle exec rake db:migrate
+          - bundle exec rake db:create
+          - bundle exec rake db:migrate
           - RAILS_MASTER_KEY=$TEST_MASTER_KEY RAILS_ENV=test bundle exec rspec
 
 pipelines:
