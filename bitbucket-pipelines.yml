@@ -1,6 +1,8 @@
 image: ruby:2.7.1
 
 definitions:
+  caches:
+    bundler: vendor/bundle
   services:
     mysql:
       image: mysql:latest
@@ -14,10 +16,12 @@ definitions:
           - ruby -wc **/*.rb
     - step: &pre-build
         name: Checking Dependencies & Running Rspec Tests
+        caches:
+          - bundler
         script:
-          - bundle install
-          - bundle exec rake db:create
-          - bundle exec rake db:migrate
+          - bundle install --path vendor/bundle
+          - RAILS_MASTER_KEY=$TEST_MASTER_KEY RAILS_ENV=test bundle exec rake db:create
+          - RAILS_MASTER_KEY=$TEST_MASTER_KEY RAILS_ENV=test bundle exec rake db:migrate
           - RAILS_MASTER_KEY=$TEST_MASTER_KEY RAILS_ENV=test bundle exec rspec
 
 pipelines:
