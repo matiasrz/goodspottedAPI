@@ -5,8 +5,7 @@ definitions:
     bundler: vendor/bundle
   services:
     mysql:
-      image: mysql:latest
-      command: mysqld --default-authentication-plugin=mysql_native_password
+      image: mysql:5
       variables:
         MYSQL_DATABASE: foof_test
         MYSQL_ROOT_PASSWORD: $DB_TEST_PASSWORD
