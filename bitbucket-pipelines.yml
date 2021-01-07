@@ -23,6 +23,8 @@ definitions:
           - RAILS_MASTER_KEY=$TEST_MASTER_KEY RAILS_ENV=test bundle exec rake db:create
           - RAILS_MASTER_KEY=$TEST_MASTER_KEY RAILS_ENV=test bundle exec rake db:migrate
           - RAILS_MASTER_KEY=$TEST_MASTER_KEY RAILS_ENV=test bundle exec rspec
+        services: 
+          - mysql
 
 pipelines:
   branches:
