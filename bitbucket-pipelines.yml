@@ -2,28 +2,19 @@ image: ruby:2.7.1
 
 definitions:
   steps:
-    - step: &dependencies
-        name: Checking Dependencies
-        script:
-          - bundle install
-    - step: &lint-code
-        name: Lint code
+    - step: &syntax-check
+        name: Checking Ruby Syntax
         script:
           - ruby -wc **/*.rb
-    - step: &rspec
-        name: Running Rspec Tests
+    - step: &pre-build
+        name: Checking Dependencies & Running Rspec Tests
         script:
+          - bundle install
           - bundle exec rspec
-    - step: &migrations
-        name: Running Migrations
-        script:
           - bundle exec rake db:migrate
 
 pipelines:
   branches:
     master:
-      - parallel:
-        - step: *dependencies
-        - step: *lint-code
-      - step: *rspec
-      - step: *migrations
+      - step: *syntax-check
+      - step: *pre-build
