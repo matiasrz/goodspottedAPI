@@ -10,8 +10,8 @@ definitions:
         name: Checking Dependencies & Running Rspec Tests
         script:
           - bundle install
-          - bundle exec rspec
-          - bundle exec rake db:migrate
+          - RAILS_MASTER_KEY=$TEST_MASTER_KEY RAILS_ENV=test bundle exec rake db:migrate
+          - RAILS_MASTER_KEY=$TEST_MASTER_KEY RAILS_ENV=test bundle exec rspec
 
 pipelines:
   branches:
