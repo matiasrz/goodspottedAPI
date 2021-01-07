@@ -19,7 +19,8 @@ definitions:
         caches:
           - bundler
         script:
-          - bundle install --path vendor/bundle
+          - bundle config set path 'vendor/bundle'
+          - bundle install
           - RAILS_MASTER_KEY=$TEST_MASTER_KEY RAILS_ENV=test bundle exec rake db:create
           - RAILS_MASTER_KEY=$TEST_MASTER_KEY RAILS_ENV=test bundle exec rake db:migrate
           - RAILS_MASTER_KEY=$TEST_MASTER_KEY RAILS_ENV=test bundle exec rspec
